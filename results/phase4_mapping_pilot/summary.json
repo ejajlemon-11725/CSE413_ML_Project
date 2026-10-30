@@ -1,0 +1,15 @@
+{
+  "refseq_checked": 2525,
+  "mapping_pairs": 3273,
+  "failedIds": [
+    "NP_001265273.1",
+    "NP_001265273.1",
+    "NP_001265273.1",
+    "NP_001265273.1",
+    "NP_001265273.1",
+    "NP_001265273.1",
+    "NP_001265273.1"
+  ],
+  "exact_pairs": 2598,
+  "alphafold_available_exact_pairs": 2582
+}
