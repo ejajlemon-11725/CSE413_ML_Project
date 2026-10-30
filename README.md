@@ -2,6 +2,12 @@
 
 Hybrid Machine Learning pipeline for predicting protein pathogenicity. Integrates ESM-2 (650M) embeddings and AlphaFold structural annotations with an advanced XGBoost/LGBM/CatBoost ensemble. Features a comprehensive Streamlit dashboard for real-time risk assessment, conformal prediction, and conformal validation on 62,727 genetic variants.
 
+## 🔗 Live Demo
+
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://cse413mlproject-9t8thqsz7bsyaajgbr68vq.streamlit.app/)
+
+👉 **Try it live:** https://cse413mlproject-9t8thqsz7bsyaajgbr68vq.streamlit.app/
+
 ## 🌟 Features
 
 - **🔬 Prediction Interface:** Predict variant pathogenicity via batch CSV upload (Top 300 Features) or interactive sequence inputs.
