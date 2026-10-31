@@ -7,6 +7,7 @@ from xgboost import XGBClassifier
 from lightgbm import LGBMClassifier
 from catboost import CatBoostClassifier
 from sklearn.linear_model import LogisticRegression
+import joblib
 import CSE413_Phase1_Baseline as base
 
 ROOT = Path(r'D:\CSE413_ML_Project')
@@ -47,8 +48,32 @@ def main():
 
     X = pd.concat([bio, esm, af, ann], axis=1)
     
+    # ----------------------------------------------------
+    # ADDED FOR STREAMLIT: Save the actual test data
+    # ----------------------------------------------------
+    print("Saving realistic biological test data for Streamlit...")
+    try:
+        top_features = joblib.load('top_300_features.pkl')
+        df_test_real = X.iloc[te].copy()
+        
+        df_test_300 = pd.DataFrame(index=df_test_real.index)
+        for c in top_features:
+            if c in df_test_real.columns:
+                df_test_300[c] = df_test_real[c]
+            else:
+                df_test_300[c] = 0 # Safety fallback
+                
+        # Get first 200 variants (a good mix of Benign/Pathogenic) for the dashboard
+        df_test_300.head(200).to_csv("final_real_test_data.csv", index=False)
+        print("✅ Success! 'final_real_test_data.csv' is ready for Streamlit!")
+    except Exception as e:
+        print(f"⚠️ Could not save CSV. Error: {e}")
+    # ----------------------------------------------------
+
     X_train_val, y_train_val = X.iloc[tr_va].to_numpy(dtype=np.float32), y[tr_va]
     X_test, y_test = X.iloc[te].to_numpy(dtype=np.float32), y[te]
+    
+    # Delete massive variables to free up RAM
     del X, esm, bio, af, ann, df
 
     print("Training Final Super-Stacking Ensemble on Train+Val (Might take a bit longer)...")
